@@ -1,2 +1,1 @@
-# SoulPactum
-Our Exam Project
+# FinalProject
