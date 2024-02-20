@@ -29,7 +29,7 @@
                     <a class="nav-link <?php echo ($menu == 'rolunk' ? ' active' : ''); ?>" href="index.php?menu=rolunk">Rólunk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo ($menu == 'cart' ? ' active' : ''); ?>" href="index.php?menu=cart" >Kosár</a>
+                    <a class="nav-link <?php echo ($menu == 'cart' ? ' active' : ''); ?>" href="index.php?menu=cart">Kosár</a>
                 </li>
             </ul>
         </div>

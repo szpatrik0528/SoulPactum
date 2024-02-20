@@ -22,13 +22,13 @@ class Database {
     }
 
     public function register($fullname, $emailcim, $username, $password) {
-        $stmt = $this->db->prepare("INSERT INTO `users`(`userid`, `fullname`, `emailcim`, `username`, `password`) VALUES (NULL,?,?,?,?)");
+        $stmt = $this->db->prepare("INSERT INTO `users`(`userid`, `teljesnev`, `emailcim`, `username`, `password`) VALUES (NULL,?,?,?,?)");
 
         if (!$stmt) {
             die('Error: ' . $this->db->error);
         }
 
-        $stmt->bind_param("ssss", $fullname, $emailcim, $username, $password);
+        $stmt->bind_param("ssss", $teljesnev, $emailcim, $username, $password);
 
         try {
             if ($stmt->execute()) {
@@ -45,4 +45,10 @@ class Database {
         $result = $this->db->query("SELECT * FROM `termek`");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getUsername(){
+        $result = $this->db->query("SELECT `username` FROM `users` WHERE `userid` = " . $_SESSION['login']['userid']);
+        return $result->fetch_assoc();
+    }
+    
 }
