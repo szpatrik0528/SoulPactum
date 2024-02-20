@@ -19,6 +19,9 @@ switch ($menu) {
     case 'cart':
         require_once './pages/cart.php';
         break;
+    case 'jatek':
+        require_once './pages/jatek.php';
+        break;
     default:
         require_once './pages/home.php';
         break;

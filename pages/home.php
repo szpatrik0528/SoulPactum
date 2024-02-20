@@ -14,9 +14,17 @@
         </p>
         <div class="slider-container">
             <div class="slider">
-                <img src="./picture/jatekkep1.png" alt="Image 1" class="slide">
-                <img src="./picture/jatekterkep.png" alt="Image 2" class="slide">
+                <img src="./picture/jatekkep1.png" alt="Image 1" class="slide" >
+                <img src="./picture/jatekterkep.png" alt="Image 2" class="slide"> 
+                <img src="./picture/jatek1.png" alt="Image 3" class="slide" >
+                <img src="./picture/jatek2.png" alt="Image 4" class="slide">
             </div>
         </div>
     </div>
 </body>
+
+<footer>
+    <p>
+        Le is van védve a szellemi tulajdonjogokkal kapcsolatban, és a szerzői jogokkal kapcsolatban is.
+        &copy; 2021. Minden jog fenntartva.</p>
+</footer>
