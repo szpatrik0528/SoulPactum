@@ -14,9 +14,9 @@
                         <div class="card-body">
                             <form id="addToCartForm" action="cart.php" method="post">
                                 <input type="hidden" name="termekid" value="' . $row['termekid'] . '">
-                                <input type="hidden" name="termek_nev" value="' . $row['termek_nev'] . '">
+                                <input type="hidden" name="termek_nev" value="' . $row['termeknev'] . '">
                                 <input type="hidden" name="ar" value="' . $row['ar'] . '">
-                                <h5 class="card-title">' . $row['termek_nev'] . '</h5>
+                                <h5 class="card-title">' . $row['termeknev'] . '</h5>
                                 <p class="card-text">Ár: ' . $row['ar'] . ' Ft</p>
                                 <button type="submit" class="btn btn-outline-light" onclick="addToCartButton(event)">Kosárba</button>                            
                             </form>

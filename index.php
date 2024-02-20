@@ -3,7 +3,7 @@
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 require_once './classes/Database.php';
-$db = new Database("localhost", "root", "", "jatek");
+$db = new Database("localhost", "root", "", "soulpactum");
 
 if (!isset($_SESSION['login'])) {
     $_SESSION['login'] = false;

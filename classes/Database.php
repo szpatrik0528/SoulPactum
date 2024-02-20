@@ -21,7 +21,7 @@ class Database {
         $stmt->close();
     }
 
-    public function register($fullname, $emailcim, $username, $password) {
+    public function register($teljesnev, $emailcim, $username, $password) {
         $stmt = $this->db->prepare("INSERT INTO `users`(`userid`, `teljesnev`, `emailcim`, `username`, `password`) VALUES (NULL,?,?,?,?)");
 
         if (!$stmt) {

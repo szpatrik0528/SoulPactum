@@ -45,7 +45,7 @@ function addToCartButton(event) {
     var selectedItemID = "your_selected_item_id";
 
     // Construct the URL to jump to with the selected item ID
-    var url = "http://localhost/Vizsgaremek/index.php?menu=cart&item=" + selectedItemID;
+    var url = "http://localhost/SoulPactum/index.php?menu=cart&item=" + selectedItemID;
 
     // Navigate to the constructed URL
     window.location.href = url;

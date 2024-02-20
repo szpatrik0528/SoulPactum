@@ -4,7 +4,7 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
     $password2 = filter_input(INPUT_POST, "password2");
     $username = htmlspecialchars(filter_input(INPUT_POST, 'username'));
     $emailcim = filter_input(INPUT_POST, "emailcim", FILTER_VALIDATE_EMAIL);
-    $fullname = htmlspecialchars(filter_input(INPUT_POST, 'fullname'));
+    $teljesnev = htmlspecialchars(filter_input(INPUT_POST, 'teljesnev'));
     if (empty($emailcim) || empty($username) || empty($password) || empty($password2)) {
         echo '<p>Minden mezőt ki kell tölteni!</p>';
     } else {
@@ -22,8 +22,8 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
-                    <label for="fullname" class="form-label">Teljes név:</label>
-                    <input type="text" class="form-control" id="fullname" name="fullname" minlength="1" aria-describedby="emailHelp">
+                    <label for="teljesnev" class="form-label">Teljes név:</label>
+                    <input type="text" class="form-control" id="fullname" name="teljesnev" minlength="1" aria-describedby="emailHelp">
                 </div>
             </div>
         </div>
