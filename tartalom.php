@@ -22,6 +22,9 @@ switch ($menu) {
     case 'jatek':
         require_once './pages/jatek.php';
         break;
+    case 'profile':
+        require_once './pages/profile.php';
+        break;
     default:
         require_once './pages/home.php';
         break;

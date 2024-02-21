@@ -15,7 +15,7 @@
                 <a class="nav-link ' . ($menu == 'logout' ? ' active' : '') . '" href="index.php?menu=logout">Kilépés</a>
                 </li>' . '<li class="nav-item">
                     <a class="nav-link' . ($menu == 'termekek' ? ' active' : '') . '" href="index.php?menu=termekek" >Termékek</a>
-                  </li>'. '<li class="nav-item">
+                  </li>' . '<li class="nav-item">
                   <a class="nav-link' . ($menu == 'jatek' ? ' active' : '') . '" href="index.php?menu=jatek" >Játék Letöltés</a>
                 </li>';
                 } else {
@@ -32,6 +32,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo ($menu == 'cart' ? ' active' : ''); ?>" href="index.php?menu=cart">Kosár</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo ($menu == 'profile' ? ' active' : ''); ?>" href="index.php?menu=profile">Profil</a>
                 </li>
             </ul>
         </div>

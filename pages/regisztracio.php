@@ -11,7 +11,7 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
         if ($password != $password2) {
             echo '<p>Nem egyeznek a jelszavak!</p>';
         } else {
-            $db->register($fullname, $emailcim, $username, $password);
+            $db->register($teljesnev, $emailcim, $username, $password);
             header("Location: index.php");
         }
     }
