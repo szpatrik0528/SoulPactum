@@ -1,31 +1,36 @@
 <?php
 
-// Check if the cart session variable exists, if not, create it
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
+// Adatbázis kapcsolat létrehozása
+// Például:
+include '/database.php';
+$db = new mysqli('localhost', 'root', '', 'soulpactum');
 
-// Add item to cart
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['item'])) {
-        $item = $_POST['item'];
-        $_SESSION['cart'][] = $item;
-        echo "Item added to cart: $item";
+// Ellenőrizzük, hogy van-e kiválasztott termék
+if (isset($_POST['kivalasztva']) && !empty($_POST['kivalasztva'])) {
+    // Kiválasztott termékek lekérdezése az adatbázisból
+    $kivalasztott_termekidk = $_POST['kivalasztva'];
+    $kivalasztott_termekidk_string = implode(', ', $kivalasztott_termekidk);
+    $query = "SELECT * FROM termek WHERE termekid IN ($kivalasztott_termekidk_string)";
+    $result = $db->query($query);
+
+    // Ellenőrizzük, hogy van-e eredmény
+    if ($result->num_rows > 0) {
+        // Kiírjuk a termékeket
+        while ($row = $result->fetch_assoc()) {
+            $imageData = base64_encode($row['img']);
+            $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+
+            echo '<img src="' . $imageSrc . '" style="width: 100px ;">';
+            echo '<div class="termek">';
+            echo '<h2>' . $row['termeknev'] . '</h2>';
+            echo '<p>Ár: ' . $row['ar'] . ' Ft</p>';
+            // Itt további adatokat jeleníthetsz meg a termékekről
+            echo '</div>';
+        }
+    } else {
+        echo 'Nincs találat.';
     }
-}
-
-// Display cart items
-echo "Cart items: ";
-foreach ($_SESSION['cart'] as $item) {
-    echo "$item, ";
-}
-
-// Buy items
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['buy'])) {
-        // Process the purchase logic here
-        // ...
-        echo "Purchase successful!";
-    }
+} else {
+    echo 'Nincs kiválasztva termék.';
 }
 ?>

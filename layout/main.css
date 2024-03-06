@@ -137,8 +137,10 @@ footer {
     padding: 20px;
     background-color: #f8f9fa;
     text-align: center;
-    border-top: 1px solid #e9ecef;
     border-radius: 0 0 8px 8px;
     justify-content: center;
     position: fixed bottom;
 }
+
+
+

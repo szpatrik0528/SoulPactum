@@ -1,5 +1,5 @@
 /*Home page img slide*/
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     const slider = document.querySelector('.slider');
     let counter = 0;
     const slides = document.querySelectorAll('.slide');
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     setInterval(slide, 6000);
-});
+});*/
 
 
 // Get the modal
@@ -22,7 +22,7 @@ var modal = document.getElementById("myModal");
 
 // Get the image and insert it inside the modal
 var modalImg = document.getElementById("img01");
-function openModal(img) {
+/*function openModal(img) {
     modal.style.display = "block";
     modalImg.src = img.src;
     modalImg.classList.add('zoom'); // Add zoom animation
@@ -35,18 +35,4 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function () {
     modal.style.display = "none";
     modalImg.classList.remove('zoom'); // Remove zoom animation
-}
-
-function addToCartButton(event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
-
-    // Assuming you have some way to get the selected item, let's say its ID is stored in a variable called selectedItemID
-    var selectedItemID = "your_selected_item_id";
-
-    // Construct the URL to jump to with the selected item ID
-    var url = "http://localhost/SoulPactum/index.php?menu=cart&item=" + selectedItemID;
-
-    // Navigate to the constructed URL
-    window.location.href = url;
-}
+}*/

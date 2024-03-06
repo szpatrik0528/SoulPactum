@@ -25,6 +25,9 @@ switch ($menu) {
     case 'profile':
         require_once './pages/profile.php';
         break;
+    case 'cart':
+        require_once './pages/cart.php';
+        break;
     default:
         require_once './pages/home.php';
         break;
