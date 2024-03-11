@@ -28,6 +28,9 @@ switch ($menu) {
     case 'cart':
         require_once './pages/cart.php';
         break;
+    case 'fizetes':
+        require_once './pages/fizetes.php';
+        break;
     default:
         require_once './pages/home.php';
         break;

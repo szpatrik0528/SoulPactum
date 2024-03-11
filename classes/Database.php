@@ -52,8 +52,7 @@ class Database {
     }
     
     public function Cart(){
-        $result = $this->db->query("SELECT * FROM termek WHERE termekid IN ($kivalasztott_termekidk_string)" );
-        return $result->fetch_all(MYSQLI_ASSOC);
+        
     }
     
 }
