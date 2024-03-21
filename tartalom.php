@@ -35,4 +35,3 @@ switch ($menu) {
         require_once './pages/home.php';
         break;
 }
-
