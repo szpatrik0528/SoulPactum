@@ -7,13 +7,15 @@ $db = new Database("localhost", "root", "", "soulpactum");
 
 if (!isset($_SESSION['login'])) {
     $_SESSION['login'] = false;
+} else {
+    $_SESSION['user']=$db->Profil();
 }
 
 require_once './layout/head.php';
 ?>
 
 <body>
-
+   
     <?php
     $menu = filter_input(INPUT_GET, "menu");
     require_once './layout/header.php';
@@ -23,5 +25,4 @@ require_once './layout/head.php';
     ?>
     <script src="bootstrap-5.2.3-dist/js/bootstrap.bundle.js"></script>
 </body>
-
 </html>

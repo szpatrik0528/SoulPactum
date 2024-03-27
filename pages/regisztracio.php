@@ -20,23 +20,13 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
 <div class="container">
     <form action="#" method="post">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="teljesnev" class="form-label">Teljes név:</label>
                     <input type="text" class="form-control" id="fullname" name="teljesnev" minlength="1" aria-describedby="emailHelp">
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="emailcim" class="form-label">Email cím</label>
-                    <input type="text" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="username" class="form-label">Felhasználó név</label>
                     <input type="text" class="form-control" id="username" name="username" minlength="1" aria-describedby="emailHelp">
@@ -44,18 +34,30 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="password" class="form-label">Jelszó</label>
                     <input type="password" class="form-control" id="password" minlength="2" name="password">
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="password2" class="form-label">Jelszó megerősítés</label>
                     <input type="password" class="form-control" id="password2" minlength="2" name="password2">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="emailcim" class="form-label">Email cím</label>
+                    <input type="text" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="telefonszam" class="form-label">Telefonszám</label>
+                    <input type="text" class="form-control" id="telefonszam" name="telefonszam" minlength="11" >
                 </div>
             </div>
         </div>

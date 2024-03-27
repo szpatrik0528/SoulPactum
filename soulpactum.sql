@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Feb 20. 11:53
+-- Létrehozás ideje: 2024. Már 27. 09:52
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -105,8 +105,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userid`, `username`, `password`, `salt`, `regisztralt`, `pontszam`, `halalokszama`, `Levels`, `skin`, `teljesnev`, `emailcim`, `adoszam`, `iranyitoszam`, `telepules`, `cim`, `telefonszam`) VALUES
 (1, 'Patrik', '1234', '', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Szivós Patrik Dávid', 'szivospatrikdavid@gmail.com', '', '', '', '', '0'),
 (3, 'lajos', '12345', '', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Nagy Lajos', 'nagylajos@gmail.com', '', '', '', '', '0'),
-(4, 'admin', 'Butyok01@@', '', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Admin', 'admin@admin.com', '', '', '', '', '0'),
-(5, 'nagypista', 'nagypista1', '', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Nagy Pista', 'nagypista@gmail.com', '', '', '', '', '0');
+(5, 'nagypista', 'nagypista1', '', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Nagy Pista', 'nagypista@gmail.com', '', '', '', '', '0'),
+(6, 'admin', 'Butyok01@@', '', '2024-03-27 09:45:58', 0, 0, 1, 0, 'Szivós Patrik Dávid', 'szivospatrikdavid@gmail.com', '56565656', '9915', 'Katafaű', 'Petőfi Sándor út 1/22', '06824586321');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -161,7 +161,7 @@ ALTER TABLE `termek`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Megkötések a kiírt táblákhoz

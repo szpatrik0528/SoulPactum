@@ -17,19 +17,25 @@ $maker = array(
     )
 );
 ?>
-
 <body>
     <div class="card-container">
-        <?php foreach ($maker as $maker) : ?>
-            <div class="card-rolunk">
-                <?php if (!empty($maker["img"]) && file_exists($maker["img"])) : ?>
-                    <img class="rolunk" src="<?php echo $maker["img"]; ?>" alt="<?php echo $maker["name"]; ?> Image">
-                <?php else : ?>
-                    <p>No Image Available</p>
-                <?php endif; ?>
-                <p><?php echo $maker["name"]; ?></p>
-                <p>Email: <?php echo $maker["email"]; ?></p>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <?php foreach ($maker as $maker): ?>
+        <div class="card-rolunk">
+            <?php if (!empty($maker["img"]) && file_exists($maker["img"])): ?>
+                <img class="rolunk" src="<?php echo $maker["img"]; ?>" alt="<?php echo $maker["name"]; ?> Image">
+            <?php else: ?>
+                <p>No Image Available</p>
+            <?php endif; ?>
+            <p><?php echo $maker["name"]; ?></p>
+            <p>Email: <?php echo $maker["email"]; ?></p>
+        </div>
+    <?php endforeach; ?>
+</div>
 </body>
+
+
+<script>
+    function sendEmail(email) {
+        window.location.href = "mailto:" + email;
+    }
+</script>

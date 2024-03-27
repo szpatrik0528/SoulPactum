@@ -12,9 +12,13 @@ class Database {
         $stmt = $this->db->prepare('SELECT `userid`, `username`, `password` FROM `users` WHERE username = ? and  password = ?');
         $stmt->bind_param("ss", $username, $password);
         if ($stmt->execute()) {
+            $stmt->bind_result($getuserid, $getusername, $getpassword);
             $stmt->store_result();
             if ($stmt->num_rows > 0) {
                 $_SESSION['login'] = true;
+                $stmt->fetch();
+                $_SESSION['username']=$getusername;
+                //$_SESSION['userid'] = ['userid'];
                 header("Location: index.php");
             }
         }
@@ -46,13 +50,19 @@ class Database {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUsername(){
+    public function getUsername() {
         $result = $this->db->query("SELECT `username` FROM `users` WHERE `userid` = " . $_SESSION['login']['userid']);
         return $result->fetch_assoc();
     }
-    
-    public function Cart(){
-        
+
+    public function Profil() {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $_SESSION['username']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            return null;
+        }
+        return $result->fetch_assoc();
     }
-    
 }

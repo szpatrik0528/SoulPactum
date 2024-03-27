@@ -22,8 +22,8 @@ switch ($menu) {
     case 'jatek':
         require_once './pages/jatek.php';
         break;
-    case 'profile':
-        require_once './pages/profile.php';
+    case 'profil':
+        require_once './pages/profil.php';
         break;
     case 'cart':
         require_once './pages/cart.php';
@@ -35,3 +35,4 @@ switch ($menu) {
         require_once './pages/home.php';
         break;
 }
+

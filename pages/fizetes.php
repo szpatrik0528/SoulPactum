@@ -43,8 +43,19 @@
                             </div>
                         </form>
                     </div>
-                    </div>
-                <p class="text-center">Fizetendő összeg: $<?php echo $total_price; ?></p>
+                </div>
+                <p class="text-center">Fizetendő összeg:
+                    <?php
+                    require_once 'cart.php';
+                    ?>
+                    <?php
+                    if (isset($total_price)) {
+                        echo $total_price;
+                    } else {
+                        echo "Error";
+                    }
+                    ?>
+                </p>
             </div>
         </article>
     </div>
