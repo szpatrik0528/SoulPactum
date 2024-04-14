@@ -86,39 +86,11 @@ if (!empty($_SESSION['kosar'])) {
 
     // Fizetés gomb
 ?>
-    <form method = "post" action = "index.php?menu=fizetes">
-    foreach ($_SESSION['kosar'] as $index => $termek) {
-        echo '<input type="hidden" name="items[' . $index . '][id]" value="' . $termek['id'] . '">';
-        echo '<input type="hidden" name="items[' . $index . '][nev]" value="' . $termek['nev'] . '">';
-        echo '<input type="hidden" name="items[' . $index . '][ar]" value="' . $termek['ar'] . '">';
-    }
+<form method="post" action="index.php?menu=fizetes">
     <button type="submit" name="fizetes">Fizetés</button>
-    </form>
+</form>
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_POST['fizetes'])) {
-    // Get the items from the form
-    $items = $_POST['items'];
-
-    // Insert each item into the database
-    foreach ($items as $item) {
-      $stmt = $db->prepare("INSERT INTO rendeles (userid, termekid, datum, osszeg) VALUES (?, ?, NOW(), ?)");
-      $stmt->bind_param("iis", $userid, $termekid, $osszeg);
-      $userid = $_SESSION['userid']; // Assuming you have a session variable for the user ID
-      $termekid = $item['id'];
-      $osszeg = $item['ar'];
-      $stmt->execute();
-    }
-
-    // Clear the cart
-    $_SESSION['kosar'] = array();
-    $_SESSION['total_price'] = 0;
-
-    // Redirect the user to a confirmation page
-    header('Location: index.php?menu=fizetes-veglegesites');
-  }
-}
 } else {
-echo 'A kosár üres.';
+    echo 'A kosár üres.';
 }
 ?>

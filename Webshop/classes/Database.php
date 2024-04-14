@@ -1,14 +1,17 @@
 <?php
 
-class Database {
+class Database
+{
 
     private $db = null;
 
-    public function __construct($host, $username, $passwor, $db) {
+    public function __construct($host, $username, $passwor, $db)
+    {
         $this->db = new mysqli($host, $username, $passwor, $db);
     }
 
-    public function login($username, $password) {
+    public function login($username, $password)
+    {
         $stmt = $this->db->prepare('SELECT `userid`, `username`, `password` FROM `users` WHERE username = ? and  password = ?');
         $stmt->bind_param("ss", $username, $password);
         if ($stmt->execute()) {
@@ -25,7 +28,8 @@ class Database {
         $stmt->close();
     }
 
-    public function register($teljesnev, $emailcim, $username, $password) {
+    public function register($teljesnev, $emailcim, $username, $password)
+    {
         $namecheckquery = "SELECT username FROM users WHERE username = " . $username;
 
         $stmt = $this->db->prepare("INSERT INTO `users`(`userid`, `teljesnev`, `emailcim`, `username`, `password`) VALUES (NULL,?,?,?,?)");
@@ -47,17 +51,20 @@ class Database {
         }
     }
 
-    public function osszesTermek() {
+    public function osszesTermek()
+    {
         $result = $this->db->query("SELECT * FROM `termek`");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUsername() {
+    public function getUsername()
+    {
         $result = $this->db->query("SELECT `username` FROM `users` WHERE `userid` = " . $_SESSION['login']['userid']);
         return $result->fetch_assoc();
     }
 
-    public function Profil() {
+    public function Profil()
+    {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->bind_param("s", $_SESSION['username']);
         $stmt->execute();
@@ -68,9 +75,43 @@ class Database {
         return $result->fetch_assoc();
     }
 
-    public function Rendeles($userId, $termekId, $datum, $osszeg) {
+    public function EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam)
+    {
+        $stmt = $this->db->prepare("INSERT INTO `users`(`userid`, `teljesnev`, `emailcim`, `adoszam`, `iranyitoszam`, `telepules`, `cim`, `telefonszam`) VALUES (NULL, ?,?,?,?,?,?,?)");
+
+        if (!$stmt) {
+            die('Error: ' . $this->db->error);
+        }
+
+        $stmt->bind_param("sssssss", $teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules,  $telefonszam, $cim, $telefonszam);
+        try {
+            if ($stmt->execute()) {
+                $_SESSION['login'] = true;
+                header("location: index.php");
+            }
+        } catch (Exception $e) {
+
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function Rendeles($userid, $termekid, $datum, $osszeg)
+    {
         $stmt = $this->db->prepare("INSERT INTO `rendeles`(`rendeles_id`, `userid`, `termekid`, `datum`, `osszeg`) VALUES (NULL,?,?,?,?)");
-        $stmt->bind_param("iidd", $userId, $termekId, $datum, $osszeg);
-        $stmt->execute();
+
+        if (!$stmt) {
+            die('Error: ' . $this->db->error);
+        }
+
+        $stmt->bind_param("iidd", $userid, $termekid, $datum, $osszeg);
+        try {
+            if ($stmt->execute()) {
+                $_SESSION['login'] = true;
+                header("location: index.php");
+            }
+        } catch (Exception $e) {
+
+            echo 'Error: ' . $e->getMessage();
+        }
     }
 }
