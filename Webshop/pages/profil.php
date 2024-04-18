@@ -1,8 +1,8 @@
 <?php
-// Assuming you have already included the necessary files and initialized your database connection
+if(isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
+    // Ellenőrizheted a POST adatokat a biztonság kedvéért
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Handle form submission
+    // Felhasználó adatainak frissítése az adatbázisban
     $teljesnev = $_POST['teljesnev'];
     $emailcim = $_POST['emailcim'];
     $adoszam = $_POST['adoszam'];
@@ -11,52 +11,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cim = $_POST['cim'];
     $telefonszam = $_POST['telefonszam'];
 
-    // Assuming you have the user ID stored in a session variable named 'userid'
-    $userid = $_SESSION['userid'];
+    // A $db->EditProfile() függvény hívása a módosítások mentéséhez az adatbázisban
+    //$success = $db->EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
 
-    // Call the EditProfile function to update user data
-    $db->EditProfile($userid, $teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
-
-    // Redirect back to profile.php after form submission
-    header("Location: profile.php");
-    exit(); // Ensure that subsequent code is not executed after redirection
+    if($success) {
+        echo "Az adatok sikeresen módosítva lettek!";
+        // Vagy más műveletet végzel, például átirányítod a felhasználót egy másik oldalra
+    } else {
+        echo "Hiba történt az adatok módosítása közben.";
+        // Vagy más műveletet végzel, például megjeleníted a hibaüzenetet a felhasználónak
+    }
 }
 
-// Fetch user data to populate the form
-$row = $db->Profil();
-
+// Az előző rész marad ugyanaz, azaz a felhasználó adatainak megjelenítése az űrlapon
+$userData = $db->Profil();
+if(isset($userData) && !empty($userData)) {
+    $teljesnev = $userData['teljesnev'];
+    $emailcim = $userData['emailcim'];
+    $adoszam = $userData['adoszam'];
+    $iranyitoszam = $userData['iranyitoszam'];
+    $telepules = $userData['telepules'];
+    $cim = $userData['cim'];
+    $telefonszam = $userData['telefonszam'];
+}
+echo $_SESSION['username'];
 ?>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <div>
-        <label for="teljesnev">Teljes név:</label>
-        <input type="text" id="teljesnev" name="teljesnev" value="<?php echo $row['teljesnev']; ?>">
-    </div>
-    <div>
-        <label for="emailcim">Email cím:</label>
-        <input type="email" id="emailcim" name="emailcim" value="<?php echo $row['emailcim']; ?>">
-    </div>
-    <div>
-        <label for="adoszam">Adószám:</label>
-        <input type="text" id="adoszam" name="adoszam" value="<?php echo $row['adoszam']; ?>">
-    </div>
-    <div>
-        <label for="iranyitoszam">Irányítószám:</label>
-        <input type="text" id="iranyitoszam" name="iranyitoszam" value="<?php echo $row['iranyitoszam']; ?>">
-    </div>
-    <div>
-        <label for="telepules">Település:</label>
-        <input type="text" id="telepules" name="telepules" value="<?php echo $row['telepules']; ?>">
-    </div>
-    <div>
-        <label for="cim">Cím:</label>
-        <input type="text" id="cim" name="cim" value="<?php echo $row['cim']; ?>">
-    </div>
-    <div>
-        <label for="telefonszam">Telefonszám:</label>
-        <input type="tel" id="telefonszam" name="telefonszam" value="<?php echo $row['telefonszam']; ?>">
-    </div>
-    <div>
-        <button type="submit">Mentés</button>
-    </div>
-</form>
+<div class="container">
+    <form action="#" method="post">
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="teljesnev" class="form-label">Teljes név:</label>
+                    <input type="text" class="form-control" id="teljesnev" name="teljesnev" minlength="1" value="<?php echo $teljesnev; ?>">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="emailcim" class="form-label">Email cím:</label>
+                    <input type="email" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp" value="<?php echo $emailcim; ?>">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="adoszam" class="form-label">Adószám:</label>
+                    <input type="text" class="form-control" id="adoszam" name="adoszam" value="<?php echo $adoszam; ?>">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="iranyitoszam" class="form-label">Irányítószám:</label>
+                    <input type="text" class="form-control" id="iranyitoszam" minlength="4" name="iranyitoszam" value="<?php echo $iranyitoszam; ?>">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="telepules" class="form-label">Település</label>
+                    <input type="text" class="form-control" id="telepules" name="telepules" value="<?php echo $telepules; ?>">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="cim" class="form-label">Cím:</label>
+                    <input type="text" class="form-control" id="cim" name="cim" value="<?php echo $cim; ?>">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="telefonszam" class="form-label">Telefonszám:</label>
+                    <input type="text" class="form-control" id="telefonszam" name="telefonszam" minlength="11" value="<?php echo $telefonszam; ?>">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" name="editadatok" value="true">Update</button>
+    </form>
+</div>

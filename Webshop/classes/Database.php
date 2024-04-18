@@ -77,13 +77,13 @@ class Database
 
     public function EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam)
     {
-        $stmt = $this->db->prepare("INSERT INTO `users`(`userid`, `teljesnev`, `emailcim`, `adoszam`, `iranyitoszam`, `telepules`, `cim`, `telefonszam`) VALUES (NULL, ?,?,?,?,?,?,?)");
+        $stmt = $this->db->prepare("UPDATE `users` SET `teljesnev`= ? ,`emailcim`= ? ,`adoszam`= ? ,`iranyitoszam`= ? ,`telepules`= ? ,`cim`= ? ,`telefonszam`= ?  WHERE `userid` =?");
 
         if (!$stmt) {
             die('Error: ' . $this->db->error);
         }
 
-        $stmt->bind_param("sssssss", $teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules,  $telefonszam, $cim, $telefonszam);
+        $stmt->bind_param("ssisssi", $teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
         try {
             if ($stmt->execute()) {
                 $_SESSION['login'] = true;
