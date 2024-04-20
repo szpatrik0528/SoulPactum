@@ -92,6 +92,7 @@ class Database
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
+        
     }
 
     public function Rendeles($userid, $termekid, $datum, $osszeg)
