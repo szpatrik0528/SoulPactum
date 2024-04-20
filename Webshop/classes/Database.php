@@ -87,10 +87,9 @@ class Database
         try {
             if ($stmt->execute()) {
                 $_SESSION['login'] = true;
-                header("location: index.php");
+                header("location: profile.php");
             }
         } catch (Exception $e) {
-
             echo 'Error: ' . $e->getMessage();
         }
     }

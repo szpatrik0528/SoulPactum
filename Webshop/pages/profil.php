@@ -12,10 +12,11 @@ if(isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
     $telefonszam = $_POST['telefonszam'];
 
     // A $db->EditProfile() függvény hívása a módosítások mentéséhez az adatbázisban
-    //$success = $db->EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
+    $editsuccess->$db->EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
 
-    if($success) {
+    if($editsuccess) {
         echo "Az adatok sikeresen módosítva lettek!";
+        header("location: profile.php");
         // Vagy más műveletet végzel, például átirányítod a felhasználót egy másik oldalra
     } else {
         echo "Hiba történt az adatok módosítása közben.";
@@ -49,7 +50,7 @@ echo $_SESSION['username'];
             <div class="col-6">
                 <div class="mb-3">
                     <label for="emailcim" class="form-label">Email cím:</label>
-                    <input type="email" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp" value="<?php echo $emailcim; ?>">
+                    <input type="text" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp" value="<?php echo $emailcim; ?>">
                 </div>
             </div>
         </div>
@@ -63,7 +64,7 @@ echo $_SESSION['username'];
             <div class="col-6">
                 <div class="mb-3">
                     <label for="iranyitoszam" class="form-label">Irányítószám:</label>
-                    <input type="text" class="form-control" id="iranyitoszam" minlength="4" name="iranyitoszam" value="<?php echo $iranyitoszam; ?>">
+                    <input type="number" class="form-control" id="iranyitoszam" minlength="4" name="iranyitoszam" value="<?php echo $iranyitoszam; ?>">
                 </div>
             </div>
         </div>
@@ -85,7 +86,7 @@ echo $_SESSION['username'];
             <div class="col-6">
                 <div class="mb-3">
                     <label for="telefonszam" class="form-label">Telefonszám:</label>
-                    <input type="text" class="form-control" id="telefonszam" name="telefonszam" minlength="11" value="<?php echo $telefonszam; ?>">
+                    <input type="number" class="form-control" id="telefonszam" name="telefonszam" minlength="11" value="<?php echo $telefonszam; ?>">
                 </div>
             </div>
         </div>
