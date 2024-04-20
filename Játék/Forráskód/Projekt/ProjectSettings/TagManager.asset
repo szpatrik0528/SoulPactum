@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - cseresznye
+  - trap
+  - leesoblokk
+  - dinnye
+  - kiwi
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - fal
+  - ok
+  - hatter
+  - leesoblock
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: hatter
+    uniqueID: 740933285
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: palya
+    uniqueID: 3609708869
+    locked: 0
+  - name: fal
+    uniqueID: 1367889447
+    locked: 0
