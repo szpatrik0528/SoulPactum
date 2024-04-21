@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
+if (isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
     // Ellenőrizheted a POST adatokat a biztonság kedvéért
 
     // Felhasználó adatainak frissítése az adatbázisban
@@ -14,10 +14,11 @@ if(isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
     // A $db->EditProfile() függvény hívása a módosítások mentéséhez az adatbázisban
     $editsuccess = $db->EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
 
-    if($editsuccess) {
+    if ($editsuccess) {
         // Sikeres módosítás esetén
         echo "Az adatok sikeresen módosítva lettek!";
-        header('location: http://localhost/SoulPactum/Webshop/index.php?menu=profil');
+        $_SESSION['login'] = true;
+        header("location: index.php");
     } else {
         // Sikertelen módosítás esetén
         echo "Hiba történt az adatok módosítása közben.";
@@ -27,7 +28,7 @@ if(isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
 
 // Az előző rész marad ugyanaz, azaz a felhasználó adatainak megjelenítése az űrlapon
 $userData = $db->Profil();
-if(isset($userData) && !empty($userData)) {
+if (isset($userData) && !empty($userData)) {
     $teljesnev = $userData['teljesnev'];
     $emailcim = $userData['emailcim'];
     $adoszam = $userData['adoszam'];
@@ -90,6 +91,6 @@ if(isset($userData) && !empty($userData)) {
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" name="editadatok" value="true">Update</button>
+        <button id="updateButton" type="submit" class="btn btn-primary" name="editadatok" value="true">Update</button>
     </form>
 </div>

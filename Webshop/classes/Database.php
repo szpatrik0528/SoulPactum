@@ -30,7 +30,7 @@ class Database
 
     public function register($teljesnev, $emailcim, $username, $password)
     {
-        $namecheckquery = "SELECT username FROM users WHERE username = " . $username;
+        //$namecheckquery = "SELECT username FROM users WHERE username = '" . $username . "'";
 
         $stmt = $this->db->prepare("INSERT INTO `users`(`userid`, `teljesnev`, `emailcim`, `username`, `password`) VALUES (NULL,?,?,?,?)");
 
@@ -116,22 +116,23 @@ class Database
     }
 
 
-    public function Rendeles($userid, $termekidk, $datum, $osszeg)
+    public function Rendeles($userid, $termekid, $datum, $osszeg)
     {
         // SQL lekérdezés előkészítése
-        $stmt = $this->db->prepare("INSERT INTO rendeles (userid, termekid, datum, osszeg) VALUES (?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO `rendeles` (`rendeles_id`, `userid`, `termekid`, `datum`, `osszeg`) VALUES (NULL, ?, ?, ?, ?);");
         if (!$stmt) {
             die('Error: ' . $this->db->error);
         }
 
         // Paraméterek kötése a prepared statement-hez
-        $stmt->bind_param("isis", $userid, $termekidk, $datum, $osszeg);
+        $stmt->bind_param("iisd", $userid, $termekid, $datum, $osszeg);
 
         // Lekérdezés végrehajtása
         if ($stmt->execute()) {
             // Sikeres beszúrás esetén
             $_SESSION['login'] = true;
             header("location: index.php");
+            exit; // Add this line to prevent further execution after redirection
         } else {
             // Sikertelen beszúrás esetén
             echo "Error: " . $stmt->error;

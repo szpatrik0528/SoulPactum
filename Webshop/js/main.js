@@ -37,3 +37,8 @@ var span = document.getElementsByClassName("close")[0];
 }*/
 
 
+document.getElementById("updateButton").addEventListener("click", function() {
+    // Oldal frissítése
+    location.reload();
+});
+

@@ -4,7 +4,7 @@
             <div class="card-body p-5">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="nav-tab-card">
-                        <form method="post" action="index.php">
+                        <form method="post" action="">
                             <div class="form-group">
                                 <label for="username">Teljesnév</label>
                                 <input type="text" class="form-control" name="username" placeholder="" required="">

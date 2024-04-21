@@ -5,14 +5,16 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
     $username = htmlspecialchars(filter_input(INPUT_POST, 'username'));
     $emailcim = filter_input(INPUT_POST, "emailcim", FILTER_VALIDATE_EMAIL);
     $teljesnev = htmlspecialchars(filter_input(INPUT_POST, 'teljesnev'));
-    if (empty($emailcim) || empty($username) || empty($password) || empty($password2)) {
+    if (empty($emailcim) || empty($username) || empty($password) || empty($password2) || empty($teljesnev)) {
         echo '<p>Minden mezőt ki kell tölteni!</p>';
     } else {
         if ($password != $password2) {
             echo '<p>Nem egyeznek a jelszavak!</p>';
         } else {
-            $db->register($teljesnev, $emailcim, $username, $password);
-            header("Location: index.php");
+            if ($db->register($teljesnev, $emailcim, $username, $password)) {
+            } else {
+                echo '<p>Hiba történt a regisztráció során!</p>';
+            }
         }
     }
 }
@@ -23,13 +25,13 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
             <div class="col-6">
                 <div class="mb-3">
                     <label for="teljesnev" class="form-label">Teljes név:</label>
-                    <input type="text" class="form-control" id="fullname" name="teljesnev" minlength="1" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="teljesnev" name="teljesnev" minlength="1">
                 </div>
             </div>
             <div class="col-6">
                 <div class="mb-3">
                     <label for="username" class="form-label">Felhasználó név</label>
-                    <input type="text" class="form-control" id="username" name="username" minlength="1" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="username" name="username" minlength="1">
                 </div>
             </div>
         </div>
@@ -51,7 +53,7 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
             <div class="col-6">
                 <div class="mb-3">
                     <label for="emailcim" class="form-label">Email cím</label>
-                    <input type="text" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp">
                 </div>
             </div>
         </div>

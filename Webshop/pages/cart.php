@@ -10,6 +10,20 @@ if (!isset($_SESSION['kosar'])) {
     $_SESSION['kosar'] = array();
 }
 
+/*if(isset($_POST['fizetes'])) {
+    // Először ellenőrizzük, hogy a felhasználó be van-e jelentkezve, ha nem, akkor ne hajtsuk végre a rendelést
+    if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
+        // Ha be van jelentkezve a felhasználó, hívjuk meg a Rendeles függvényt az adatokkal
+        $userid = $_SESSION['userid']; // például $_SESSION['userid']
+        $termekid = $_SESSION['termekid']; // például $_POST['termekid']
+        $datum = date("Y-m-d"); // A rendelés dátuma a jelenlegi dátum lesz
+        $osszeg = $_SESSION['total_price']; // például $_POST['osszeg']
+
+        // Rendeles függvény hívása
+        $db->Rendeles($userid, $termekid, $datum, $osszeg);
+    }
+}*/
+
 if (isset($_POST['kivalasztva']) && !empty($_POST['kivalasztva'])) {
     // Kiválasztott termékek lekérdezése az adatbázisból
     $kivalasztott_termekidk = $_POST['kivalasztva'];
