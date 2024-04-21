@@ -1,4 +1,3 @@
-/*Home page img slide*/
 document.addEventListener("DOMContentLoaded", function () {
     const slider = document.querySelector('.slider');
     let counter = 0;

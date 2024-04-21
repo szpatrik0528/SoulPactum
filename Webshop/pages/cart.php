@@ -65,9 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (!empty($_SESSION['kosar'])) {
     foreach ($_SESSION['kosar'] as $index => $termek) {
         echo '<div class="termek">';
-        echo '<img src="' . $termek['kep'] . '" style="width: 100px ; float: left; margin-right: 10px;">';
+        echo '<img src="' . $termek['kep'] . '" style="width: 100px; float: left; margin-right: 10px;">';
         echo '<div class="termek-info">';
         echo '<h2>' . $termek['nev'] . '</h2>';
+        '<p>Termék azonosítója: ' . $termek['id'] . '</p>'; // Termék azonosítójának kiírása
         echo '<p>Ár: ' . $termek['ar'] . ' Ft</p>';
         echo '</div>';
         echo '<form method="post">';
@@ -76,10 +77,11 @@ if (!empty($_SESSION['kosar'])) {
         echo '</form>';
         echo '</div>';
         echo '<div style="clear:both;"></div>';
-
+    
         // Számoljuk össze a teljes árat
         $_SESSION['total_price'] += $termek['ar'];
     }
+    
 
     // Összesített ár megjelenítése
     echo '<p>Összesen: ' . $_SESSION['total_price'] . ' Ft</p>';

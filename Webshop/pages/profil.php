@@ -12,13 +12,14 @@ if(isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
     $telefonszam = $_POST['telefonszam'];
 
     // A $db->EditProfile() függvény hívása a módosítások mentéséhez az adatbázisban
-    $editsuccess->$db->EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
+    $editsuccess = $db->EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
 
     if($editsuccess) {
+        // Sikeres módosítás esetén
         echo "Az adatok sikeresen módosítva lettek!";
-        header("location: profile.php");
-        // Vagy más műveletet végzel, például átirányítod a felhasználót egy másik oldalra
+        header('location: http://localhost/SoulPactum/Webshop/index.php?menu=profil');
     } else {
+        // Sikertelen módosítás esetén
         echo "Hiba történt az adatok módosítása közben.";
         // Vagy más műveletet végzel, például megjeleníted a hibaüzenetet a felhasználónak
     }
@@ -35,7 +36,6 @@ if(isset($userData) && !empty($userData)) {
     $cim = $userData['cim'];
     $telefonszam = $userData['telefonszam'];
 }
-echo $_SESSION['username'];
 ?>
 
 <div class="container">

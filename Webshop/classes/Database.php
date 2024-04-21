@@ -21,7 +21,7 @@ class Database
                 $_SESSION['login'] = true;
                 $stmt->fetch();
                 $_SESSION['username'] = $getusername;
-                //$_SESSION['userid'] = ['userid'];
+                $_SESSION['userid'] = $getuserid;
                 header("Location: index.php");
             }
         }
@@ -54,8 +54,21 @@ class Database
     public function osszesTermek()
     {
         $result = $this->db->query("SELECT * FROM `termek`");
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $termekLista = $result->fetch_all(MYSQLI_ASSOC);
+
+        // Létrehozzuk a termékek azonosítóinak tömbjét
+        $termekIdList = array();
+        foreach ($termekLista as $termek) {
+            $termekIdList[] = $termek['termekid'];
+        }
+
+        // Tároljuk el a termék azonosítók tömbjét a $_SESSION-ben
+        $_SESSION['termekid'] = $termekIdList;
+
+        // Visszaadjuk az összes terméket
+        return $termekLista;
     }
+
 
     public function getUsername()
     {
@@ -77,41 +90,51 @@ class Database
 
     public function EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam)
     {
+        // Prepare the SQL statement to update user data
         $stmt = $this->db->prepare("UPDATE `users` SET `teljesnev`= ? ,`emailcim`= ? ,`adoszam`= ? ,`iranyitoszam`= ? ,`telepules`= ? ,`cim`= ? ,`telefonszam`= ?  WHERE `userid` =?");
 
+        // Check if the statement was prepared successfully
         if (!$stmt) {
             die('Error: ' . $this->db->error);
         }
 
-        $stmt->bind_param("ssisssi", $teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam);
+        // Bind parameters to the prepared statement
+        $stmt->bind_param("ssissssi", $teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam, $_SESSION['userid']);
+
         try {
+            // Execute the prepared statement
             if ($stmt->execute()) {
+                // Update the session variable indicating the user is logged in
                 $_SESSION['login'] = true;
+                // Redirect the user to the profile page after successful update
                 header("location: profile.php");
             }
         } catch (Exception $e) {
+            // Handle exceptions if any
             echo 'Error: ' . $e->getMessage();
         }
-        
     }
 
-    public function Rendeles($userid, $termekid, $datum, $osszeg)
-    {
-        $stmt = $this->db->prepare("INSERT INTO `rendeles`(`rendeles_id`, `userid`, `termekid`, `datum`, `osszeg`) VALUES (NULL,?,?,?,?)");
 
+    public function Rendeles($userid, $termekidk, $datum, $osszeg)
+    {
+        // SQL lekérdezés előkészítése
+        $stmt = $this->db->prepare("INSERT INTO rendeles (userid, termekid, datum, osszeg) VALUES (?, ?, ?, ?)");
         if (!$stmt) {
             die('Error: ' . $this->db->error);
         }
 
-        $stmt->bind_param("iidd", $userid, $termekid, $datum, $osszeg);
-        try {
-            if ($stmt->execute()) {
-                $_SESSION['login'] = true;
-                header("location: index.php");
-            }
-        } catch (Exception $e) {
+        // Paraméterek kötése a prepared statement-hez
+        $stmt->bind_param("isis", $userid, $termekidk, $datum, $osszeg);
 
-            echo 'Error: ' . $e->getMessage();
+        // Lekérdezés végrehajtása
+        if ($stmt->execute()) {
+            // Sikeres beszúrás esetén
+            $_SESSION['login'] = true;
+            header("location: index.php");
+        } else {
+            // Sikertelen beszúrás esetén
+            echo "Error: " . $stmt->error;
         }
     }
 }

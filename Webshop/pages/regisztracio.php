@@ -54,12 +54,6 @@ if (filter_input(INPUT_POST, 'regisztraciosAdatok', FILTER_VALIDATE_BOOLEAN, FIL
                     <input type="text" class="form-control" id="emailcim" name="emailcim" minlength="1" aria-describedby="emailHelp">
                 </div>
             </div>
-            <div class="col-6">
-                <div class="mb-3">
-                    <label for="telefonszam" class="form-label">Telefonszám</label>
-                    <input type="text" class="form-control" id="telefonszam" name="telefonszam" minlength="11" >
-                </div>
-            </div>
         </div>
         <button type="submit" class="btn btn-primary" name="regisztraciosAdatok" value="true">Regisztráció</button>
     </form>
