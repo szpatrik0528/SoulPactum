@@ -116,23 +116,20 @@ class Database
     }
 
 
-    public function Rendeles($userid, $termekid, $datum, $osszeg)
+    public function Rendeles($userid, $termekid, $osszeg)
     {
         // SQL lekérdezés előkészítése
-        $stmt = $this->db->prepare("INSERT INTO `rendeles` (`rendeles_id`, `userid`, `termekid`, `datum`, `osszeg`) VALUES (NULL, ?, ?, ?, ?);");
+        $stmt = $this->db->prepare("INSERT INTO `rendeles` (`rendeles_id`, `userid`, `termekid`, `datum`, `osszeg`) VALUES (NULL, ?, ?, current_timestamp(), ?)");
         if (!$stmt) {
             die('Error: ' . $this->db->error);
         }
 
         // Paraméterek kötése a prepared statement-hez
-        $stmt->bind_param("iisd", $userid, $termekid, $datum, $osszeg);
+        $stmt->bind_param("iii", $userid, $termekid, $osszeg);
 
         // Lekérdezés végrehajtása
         if ($stmt->execute()) {
             // Sikeres beszúrás esetén
-            $_SESSION['login'] = true;
-            header("location: index.php");
-            exit; // Add this line to prevent further execution after redirection
         } else {
             // Sikertelen beszúrás esetén
             echo "Error: " . $stmt->error;
