@@ -1,9 +1,10 @@
 <?php
-if (filter_input(INPUT_POST,
-                'belepesiAdatok',
-                FILTER_VALIDATE_BOOLEAN,
-                FILTER_NULL_ON_FAILURE)) {
-    //-- A kapott adatok feldolgozása    
+if (filter_input(
+    INPUT_POST,
+    'belepesiAdatok',
+    FILTER_VALIDATE_BOOLEAN,
+    FILTER_NULL_ON_FAILURE
+)) {
     $username = htmlspecialchars(filter_input(INPUT_POST, 'username'));
 
     $password = htmlspecialchars(filter_input(INPUT_POST, 'password'));
@@ -36,4 +37,3 @@ if (filter_input(INPUT_POST,
         <button type="submit" class="btn btn-primary" name="belepesiAdatok" value="true">Belépés</button>
     </form>
 </div>
-

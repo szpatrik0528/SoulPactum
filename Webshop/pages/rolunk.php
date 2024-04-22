@@ -1,7 +1,7 @@
 <?php
 $maker = array(
     array(
-        "img" => "szivos_patrik_david.jpg",
+        "img" => "szivos_patrik_david.jpeg",
         "name" => "Szivós Patrik Dávid",
         "email" => "szivospatrikdavid@gmail.com",
         "work" => "Webshop készítő"
@@ -20,19 +20,20 @@ $maker = array(
     )
 );
 ?>
+
 <body>
     <div class="card-container">
-    <?php foreach ($maker as $maker): ?>
-        <div class="card-rolunk">
-            <?php if (!empty($maker["img"]) && file_exists($maker["img"])): ?>
-                <img class="rolunk" src="<?php echo $maker["img"]; ?>" alt="<?php echo $maker["name"]; ?> Image">
-            <?php else: ?>
-                <p>No Image Available</p>
-            <?php endif; ?>
-            <p><?php echo $maker["name"]; ?></p>
-            <p>Email: <br><?php echo $maker["email"]; ?></p>
-            <p>Munkakör: <?php echo $maker["work"]; ?></p>
-        </div>
-    <?php endforeach; ?>
-</div>
+        <?php foreach ($maker as $maker) : ?>
+            <div class="card-rolunk">
+                <?php if (!empty($maker["img"]) && file_exists($maker["img"])) : ?>
+                    <img class="rolunk" src="<?php echo $maker["img"]; ?>" alt="<?php echo $maker["name"]; ?> Image">
+                <?php else : ?>
+                    <p>No Image Available</p>
+                <?php endif; ?>
+                <p><?php echo $maker["name"]; ?></p>
+                <p>Email: <br><?php echo $maker["email"]; ?></p>
+                <p>Munkakör: <?php echo $maker["work"]; ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </body>

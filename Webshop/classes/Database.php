@@ -90,27 +90,27 @@ class Database
 
     public function EditProfile($teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam)
     {
-        // Prepare the SQL statement to update user data
+
         $stmt = $this->db->prepare("UPDATE `users` SET `teljesnev`= ? ,`emailcim`= ? ,`adoszam`= ? ,`iranyitoszam`= ? ,`telepules`= ? ,`cim`= ? ,`telefonszam`= ?  WHERE `userid` =?");
 
-        // Check if the statement was prepared successfully
+
         if (!$stmt) {
             die('Error: ' . $this->db->error);
         }
 
-        // Bind parameters to the prepared statement
+
         $stmt->bind_param("ssissssi", $teljesnev, $emailcim, $adoszam, $iranyitoszam, $telepules, $cim, $telefonszam, $_SESSION['userid']);
 
         try {
-            // Execute the prepared statement
+
             if ($stmt->execute()) {
-                // Update the session variable indicating the user is logged in
+
                 $_SESSION['login'] = true;
-                // Redirect the user to the profile page after successful update
+
                 header("Location: index.php");
             }
         } catch (Exception $e) {
-            // Handle exceptions if any
+
             echo 'Error: ' . $e->getMessage();
         }
     }
