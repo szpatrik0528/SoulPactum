@@ -107,7 +107,7 @@ class Database
                 // Update the session variable indicating the user is logged in
                 $_SESSION['login'] = true;
                 // Redirect the user to the profile page after successful update
-                header("location: profile.php");
+                header("Location: index.php");
             }
         } catch (Exception $e) {
             // Handle exceptions if any

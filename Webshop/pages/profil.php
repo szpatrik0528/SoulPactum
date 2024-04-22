@@ -17,8 +17,6 @@ if (isset($_POST['editadatok']) && $_POST['editadatok'] == 'true') {
     if ($editsuccess) {
         // Sikeres módosítás esetén
         echo "Az adatok sikeresen módosítva lettek!";
-        $_SESSION['login'] = true;
-        header("location: index.php");
     } else {
         // Sikertelen módosítás esetén
         echo "Hiba történt az adatok módosítása közben.";
