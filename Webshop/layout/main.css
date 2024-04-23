@@ -133,14 +133,16 @@ img.rolunk {
 }
 
 footer {
-    margin-top: auto;
     padding: 20px;
     background-color: #f8f9fa;
     text-align: center;
     border-radius: 0 0 8px 8px;
-    justify-content: center;
-    position: fixed bottom;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
+
 
 .termek {
     overflow: hidden; 
