@@ -1,24 +1,24 @@
 <?php
 // FILEPATH: /c:/xampp1/htdocs/SoulPactum/pages/jatek.php
 
-// Set the file path and name of your game
-$gameFilePath = 'game/game.zip';
-$gameFileName = 'SoulPactum.zip';
+// Define the path to the game folder
+$gameFolderPath = 'game/';
 
-// Check if the file exists
+// Set the filename of your game installer
+$gameFileName = 'SoulPactum Setup.exe';
+
+// Combine the folder path and filename to get the full path to the installer
+$gameFilePath = $gameFolderPath . $gameFileName;
+
+// Check if the file exists before attempting to download it
 if (file_exists($gameFilePath)) {
-    // Set the appropriate headers for the download
-    header('Content-Description: File Transfer');
+    // Force download of the file
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="' . $gameFileName . '"');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($gameFilePath));
     readfile($gameFilePath);
     exit;
 } else {
-    // Display an error message if the file does not exist
-    echo 'Sorry, the game file is not available for download.';
+    // If the file doesn't exist, display an error message
+    echo "A játék telepítőfájlja nem található.";
 }
 ?>
