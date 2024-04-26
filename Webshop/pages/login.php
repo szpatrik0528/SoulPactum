@@ -6,7 +6,9 @@ if (filter_input(
     FILTER_NULL_ON_FAILURE
 )) {
     $username = htmlspecialchars(filter_input(INPUT_POST, 'username'));
-
+    $db->getSalt($username);
+    $salt = $_SESSION['salt'];
+    $passwordh = $_SESSION['passwordh'];
     $password = htmlspecialchars(filter_input(INPUT_POST, 'password'));
     $db->login($username, $password);
 
@@ -14,6 +16,13 @@ if (filter_input(
         $_SESSION['login'] = true;
         $_SESSION['username'] = '';
         $_SESSION['password'] = '';
+    } else {
+        $loginhash = crypt($password, $salt);
+        if ($passwordh != $loginhash) {
+            echo "Incorrect password";
+            exit();
+        }
+        $_SESSION['username'] = '';
     }
 }
 ?>
@@ -24,7 +33,8 @@ if (filter_input(
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="username" class="form-label">Felhasználó név</label>
-                    <input type="text" class="form-control" id="username" name="username" minlength="5" maxlength="50" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="username" name="username" minlength="5" maxlength="50"
+                        aria-describedby="emailHelp">
                 </div>
             </div>
             <div class="col-md-6">
