@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 23. 10:42
+-- Létrehozás ideje: 2024. Ápr 26. 10:27
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -36,15 +36,6 @@ CREATE TABLE `rendeles` (
   `datum` date NOT NULL DEFAULT current_timestamp(),
   `osszeg` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- A tábla adatainak kiíratása `rendeles`
---
-
-INSERT INTO `rendeles` (`rendeles_id`, `userid`, `termekid`, `datum`, `osszeg`) VALUES
-(33, 6, 2, '2024-04-23', 433000),
-(34, 6, 3, '2024-04-23', 433000),
-(35, 6, 2, '2024-04-23', 253000);
 
 -- --------------------------------------------------------
 
@@ -95,6 +86,7 @@ CREATE TABLE `users` (
   `userid` int(10) UNSIGNED NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `salt` varchar(50) NOT NULL,
   `regisztralt` datetime NOT NULL DEFAULT current_timestamp(),
   `pontszam` int(10) NOT NULL DEFAULT 0,
   `halalokszama` int(10) NOT NULL DEFAULT 0,
@@ -113,13 +105,8 @@ CREATE TABLE `users` (
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`userid`, `username`, `password`, `regisztralt`, `pontszam`, `halalokszama`, `Levels`, `skin`, `teljesnev`, `emailcim`, `adoszam`, `iranyitoszam`, `telepules`, `cim`, `telefonszam`) VALUES
-(1, 'Patrik', '1234', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Szivós Patrik Dávid', 'szivospatrikdavid@gmail.com', '546453643', '8725', 'Debreceni', 'ibolya utca 17', '06307863398'),
-(3, 'lajos', '12345', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Nagy Lajos', 'nagylajos@gmail.com', '', '', '', '', '0'),
-(5, 'nagypista', 'nagypista1', '2024-02-20 10:38:11', 0, 0, 1, 0, 'Nagy Pista', 'nagypista@gmail.com', '', '', '', '', '0'),
-(6, 'Admin', 'Butyok01@@', '2024-03-27 09:45:58', 0, 0, 1, 0, 'Szivós Patrik Dávid', 'szivospatrikdavid@gmail.com', '565656566', '4027', 'Katafaa', 'Petőfi Sándor út 1/22', '06824586322'),
-(7, 'patrik01', 'Butyok01@@', '2024-04-21 16:10:18', 0, 0, 1, 0, 'patrik szivos david', 'nagylajos1982@gmail.com', '6543200765', '8765', 'Józsa', 'Nagy lajos u 12', '06708982323'),
-(8, 'Pitti', 'pistipisti94', '2024-04-22 11:17:36', 0, 0, 1, 0, 'Pitti Vok', 'pistipisti10@gmail.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`userid`, `username`, `password`, `salt`, `regisztralt`, `pontszam`, `halalokszama`, `Levels`, `skin`, `teljesnev`, `emailcim`, `adoszam`, `iranyitoszam`, `telepules`, `cim`, `telefonszam`) VALUES
+(10, 'PatrikPatrik', '$5$rounds=5000$steamedhamsPatri$PyWUSudBaueY3vDRRXKqQhKuLHVkUrJqrGs3x7sHpO1', '$5$rounds=5000$steamedhamsPatrikPatrik$', '2024-04-26 09:58:48', 80, 3, 1, 3, '', '', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -162,7 +149,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `rendeles_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `rendeles_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
@@ -174,7 +161,7 @@ ALTER TABLE `termek`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `userid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Megkötések a kiírt táblákhoz
