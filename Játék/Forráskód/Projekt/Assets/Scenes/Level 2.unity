@@ -2568,6 +2568,7 @@ GameObject:
   - component: {fileID: 1214860426}
   - component: {fileID: 1214860425}
   - component: {fileID: 1214860430}
+  - component: {fileID: 1214860431}
   m_Layer: 0
   m_Name: Vegezaszlo
   m_TagString: Untagged
@@ -2595,7 +2596,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214860424}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
@@ -2797,6 +2798,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1214860431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214860424}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56460c100f497df4ea56bfd3d588161f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cherries: 0
+  cherriessz: 
+  collectSoundEffect: {fileID: 1214860426}
+  pontszam: {fileID: 0}
 --- !u!4 &1267448681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6766823885133379132, guid: 6b15b2df2d9179145a41647322d2d56d, type: 3}

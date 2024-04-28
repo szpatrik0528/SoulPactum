@@ -1,3 +1,6 @@
+using System.Security.AccessControl;
+using System.Diagnostics;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +13,14 @@ public class playerMozgas : MonoBehaviour
     private Animator anim;
 
     [SerializeField] private LayerMask jumpableGround;
+     private bool isGodModeEnabled = false;
+    
 
     private float dirX = 0f;
     private float moveSpeed = 10f;
     private float jumpForce = 14f;
-    private enum MovementState {idle,run,jump,fall}    
+    private enum MovementState {idle,run,jump,fall}   
+    private bool god = false; 
 
     [SerializeField] private AudioSource jumpSoundEffect;
 
@@ -35,6 +41,7 @@ public class playerMozgas : MonoBehaviour
 
         jump();      
         UpdateAnimationUpdate();
+        GodMode();
     }
 
         private void UpdateAnimationUpdate()
@@ -76,12 +83,34 @@ public class playerMozgas : MonoBehaviour
     {
         if (Input.GetKey("space") || Input.GetKey("up") || Input.GetKey("w"))
         {
+            
             if(IsGrounded()) 
             {
                 jumpSoundEffect.Play();
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+                
+            }
+        } 
+    }
+    private void GodMode()
+    {
+         if (Input.GetKey(KeyCode.G))
+        {
+            isGodModeEnabled = !isGodModeEnabled;
+           // Debug.Log("God Mode: " + (isGodModeEnabled ? "Enabled" : "Disabled"));
+        }
+    }
+    // OnTriggerEnter2D is called when the Collider2D other enters the trigger
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the player character enters the trigger
+        if (other.CompareTag("Player"))
+        {
+            if (isGodModeEnabled)
+            {
+                // If god mode is enabled, destroy any objects that damage the player
+                Destroy(other.gameObject);
             }
         }
-        
     }
 }
