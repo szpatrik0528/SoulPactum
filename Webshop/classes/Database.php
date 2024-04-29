@@ -30,14 +30,15 @@ class Database
 
     public function getSalt($username)
     {
-        $stmt = $this->db->prepare('SELECT `salt`, `password` FROM `users` WHERE username = ?');
+        $stmt = $this->db->prepare('SELECT `userid`, `salt`, `password` FROM `users` WHERE username = ?');
         $stmt->bind_param("s", $username);
         if ($stmt->execute()) {
-            $stmt->bind_result($getsalt, $getpasswordh);
+            $stmt->bind_result($getuserid,$getsalt, $getpasswordh );
             $stmt->store_result();
             if ($stmt->num_rows > 0) {
                 $_SESSION['login'] = true;
                 $stmt->fetch();
+                $_SESSION['userid'] = $getuserid;
                 $_SESSION['passwordh'] = $getpasswordh;
                 $_SESSION['salt'] = $getsalt;
                 header("Location: index.php");
@@ -96,8 +97,8 @@ class Database
 
     public function Profil()
     {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->bind_param("s", $_SESSION['username']);
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE userid = ?");
+        $stmt->bind_param("i", $_SESSION['userid']);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows === 0) {

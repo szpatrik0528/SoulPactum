@@ -7,6 +7,7 @@ if (filter_input(
 )) {
     $username = htmlspecialchars(filter_input(INPUT_POST, 'username'));
     $db->getSalt($username);
+    $userid = $_SESSION['userid'];
     $salt = $_SESSION['salt'];
     $passwordh = $_SESSION['passwordh'];
     $password = htmlspecialchars(filter_input(INPUT_POST, 'password'));
@@ -17,12 +18,13 @@ if (filter_input(
         $_SESSION['username'] = '';
         $_SESSION['password'] = '';
     } else {
-        $loginhash = crypt($password, $salt);
+        $loginhash = crypt($password, $salt, $userid);
         if ($passwordh != $loginhash) {
             echo "Incorrect password";
             exit();
         }
         $_SESSION['username'] = '';
+        $_SESSION['userid'] = '';
     }
 }
 ?>

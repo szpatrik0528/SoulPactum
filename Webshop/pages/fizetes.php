@@ -2,7 +2,7 @@
 
 if (isset($_POST['rendeles_submit'])) {
     foreach ($_SESSION['kosar'] as $termek) {
-        $db->Rendeles($_SESSION['userid'],  $termek['id'], $_SESSION['total_price']);
+        $db->Rendeles($_SESSION['userid'],  $termek['id'], $termek['ar']);
     }
     header("location: index.php");
 }
